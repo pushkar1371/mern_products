@@ -15,6 +15,9 @@ app.use(express.json()); // allows us to accept JSON data in the req.body
 
 app.use("/api/products", productRoutes);
 
+
+
+
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "/frontend/dist")));
 	app.get("/{*any}", (req, res) => {
@@ -22,6 +25,8 @@ if (process.env.NODE_ENV === "production") {
 	});
 }
 
+
+console.log(process.env.REDIS_ENDPOINT, process.env.REDISPASSWORD);
 app.listen(PORT, () => {
 	connectDB();
 	console.log("Server started at http://localhost:" + PORT);
