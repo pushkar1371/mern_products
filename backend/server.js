@@ -15,6 +15,12 @@ app.use(express.json()); // allows us to accept JSON data in the req.body
 
 app.use("/api/products", productRoutes);
 
+// This code runs only in production.
+
+// express.static(...) → serves the React build files (HTML, JS, CSS) from frontend/dist.
+
+// app.get("/*", ...) → for any unknown route, send index.html so React Router can handle it on the frontend.
+
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "/frontend/dist")));
 	app.get("/{*any}", (req, res) => {
